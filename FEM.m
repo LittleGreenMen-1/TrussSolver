@@ -239,12 +239,12 @@ function loadTruss(filename)
 
     fprintf("m = %f\nr = %f\n2 * n = %f\n", m, r, 2 * n);
     
-    % % Check if the truss is statically determinate
-    % if m + r == 2 * n
-    %     fprintf("The truss is statically determinate.\n");
-    % else
-    %     error("The truss is statically indeterminate.");
-    % end
+    % Check if the truss is statically determinate
+    if m + r == 2 * n
+        fprintf("The truss is statically determinate.\n");
+    else
+        error("The truss is statically indeterminate.");
+    end
 
     fclose(file);
 end
@@ -386,14 +386,14 @@ function showTruss()
         v_dir = ['top', 'bottom'];
 
         % Plot Ox force
-        % if abs(f(1)) > 0.01
-        %     if f(1) < 0 dir = -width; text_dir = 'right'; else dir = width; text_dir = 'left'; end
+        if abs(f(1)) > 0.01
+            if f(1) < 0 dir = -width; text_dir = 'right'; else dir = width; text_dir = 'left'; end
 
-        %     dir = dir * abs(f(1)) / max_force;
+            dir = dir * abs(f(1)) / max_force;
             
-        %     quiver(nodes(i, 1), nodes(i, 2), .4 * dir, 0, 0);
-        %     text(nodes(i, 1) + .4 * dir, nodes(i, 2), sprintf("%.1fN", f(1)), 'HorizontalAlignment', text_dir, 'VerticalAlignment', 'middle', 'FontSize', 10);
-        % end
+            quiver(nodes(i, 1), nodes(i, 2), .4 * dir, 0, 0);
+            text(nodes(i, 1) + .4 * dir, nodes(i, 2), sprintf("%.1fN", f(1)), 'HorizontalAlignment', text_dir, 'VerticalAlignment', 'middle', 'FontSize', 10);
+        end
 
         % Plot Oy force
         if abs(f(2)) > 0.01
